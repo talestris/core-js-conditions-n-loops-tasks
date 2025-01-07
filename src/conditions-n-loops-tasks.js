@@ -22,7 +22,7 @@
  *  -5 => false
  */
 function isPositive(number) {
-
+  return number >= 0;
 }
 
 /**
@@ -39,7 +39,13 @@ function isPositive(number) {
  *  -0.1, 0, 0.2  => 0.2
  */
 function getMaxNumber(a, b, c) {
-
+  if (a > b && a > c) {
+    return a;
+  } else if (b > a && b > c) {
+    return b;
+  } else {
+    return c;
+  }
 }
 
 /**
@@ -61,7 +67,16 @@ function getMaxNumber(a, b, c) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
 function canQueenCaptureKing(queen, king) {
-
+  if (queen.x === king.x) {
+    return true;
+  }
+  if (queen.y === king.y) {
+    return true;
+  }
+  if (Math.abs(queen.x - king.x) === Math.abs(queen.y - king.y)) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -82,9 +97,7 @@ function canQueenCaptureKing(queen, king) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(a, b, c) {
-
-}
+function isIsoscelesTriangle(a, b, c) {}
 
 /**
  * Converts a number to Roman numerals. The number will be between 1 and 39.
@@ -100,9 +113,7 @@ function isIsoscelesTriangle(a, b, c) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(num) {
-
-}
+function convertToRomanNumerals(num) {}
 
 /**
  * Converts a number to a string, replacing digits with words.
@@ -119,9 +130,7 @@ function convertToRomanNumerals(num) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(numberStr) {
-
-}
+function convertNumberToString(numberStr) {}
 
 /**
  * Determines whether a string is a palindrome.
@@ -135,9 +144,7 @@ function convertNumberToString(numberStr) {
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(str) {
-
-}
+function isPalindrome(str) {}
 
 /**
  * Finds the first occurrence of a letter in a string.
@@ -153,9 +160,7 @@ function isPalindrome(str) {
  *  'qwerty', 'Q'     => -1
  *  'qwerty', 'p'     => -1
  */
-function getIndexOf(str, letter) {
-
-}
+function getIndexOf(str, letter) {}
 
 /**
  * Checks if a number contains a specific digit.
@@ -172,9 +177,7 @@ function getIndexOf(str, letter) {
  *  12345, 0    => false
  *  12345, 6    => false
  */
-function isContainNumber(num, digit) {
-
-}
+function isContainNumber(num, digit) {}
 
 /**
  * Finds the index of an element in an array where the sum of elements to the left equals the sum of elements to the right.
@@ -189,9 +192,7 @@ function isContainNumber(num, digit) {
  *  [2, 3, 9, 5] => 2       => 2 + 3 === 5 then balance element is 9 and its index = 2
  *  [1, 2, 3, 4, 5] => -1   => no balance element
  */
-function getBalanceIndex(arr) {
-
-}
+function getBalanceIndex(arr) {}
 
 /**
  * Generates a spiral matrix of a given size, filled with numbers in ascending order starting from one.
@@ -214,9 +215,7 @@ function getBalanceIndex(arr) {
  *          [10, 9,  8,  7]
  *        ]
  */
-function getSpiralMatrix(size) {
-
-}
+function getSpiralMatrix(size) {}
 
 /**
  * Rotates a matrix by 90 degrees clockwise in place.
@@ -233,9 +232,7 @@ function getSpiralMatrix(size) {
  *    [7, 8, 9]         [9, 6, 3]
  *  ]                 ]
  */
-function rotateMatrix(matrix) {
-
-}
+function rotateMatrix(matrix) {}
 
 /**
  * Sorts an array of numbers in ascending order in place.
@@ -251,9 +248,7 @@ function rotateMatrix(matrix) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
-function sortByAsc(arr) {
-
-}
+function sortByAsc(arr) {}
 
 /**
  * Shuffles characters in a string so that the characters with an odd index are moved to the end of the string at each iteration.
@@ -272,9 +267,7 @@ function sortByAsc(arr) {
  *  '012345', 3 => '024135' => '043215' => '031425'
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
-function shuffleChar(str, iterations) {
-
-}
+function shuffleChar(str, iterations) {}
 
 /**
  * Returns the nearest largest integer consisting of the digits of the given positive integer.
@@ -293,9 +286,7 @@ function shuffleChar(str, iterations) {
  * @param {number} number The source number
  * @returns {number} The nearest larger number, or original number if none exists.
  */
-function getNearestBigger(number) {
-
-}
+function getNearestBigger(number) {}
 
 module.exports = {
   isPositive,
