@@ -97,7 +97,15 @@ function canQueenCaptureKing(queen, king) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(a, b, c) {}
+function isIsoscelesTriangle(a, b, c) {
+  if (a + b <= c || a + c <= b || b + c <= a) {
+    return false;
+  }
+  if (a === b || a === c || b === c) {
+    return true;
+  }
+  return false;
+}
 
 /**
  * Converts a number to Roman numerals. The number will be between 1 and 39.
@@ -113,7 +121,24 @@ function isIsoscelesTriangle(a, b, c) {}
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(num) {}
+function convertToRomanNumerals(num) {
+  if (num >= 10) {
+    return 'X' + convertToRomanNumerals(num - 10);
+  }
+  if (num >= 9) {
+    return 'IX' + convertToRomanNumerals(num - 9);
+  }
+  if (num >= 5) {
+    return 'V' + convertToRomanNumerals(num - 5);
+  }
+  if (num >= 4) {
+    return 'IV' + convertToRomanNumerals(num - 4);
+  }
+  if (num >= 1) {
+    return 'I' + convertToRomanNumerals(num - 1);
+  }
+  return '';
+}
 
 /**
  * Converts a number to a string, replacing digits with words.
@@ -130,7 +155,34 @@ function convertToRomanNumerals(num) {}
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(numberStr) {}
+function convertNumberToString(numberStr) {
+  const digitToWord = {
+    0: 'zero',
+    1: 'one',
+    2: 'two',
+    3: 'three',
+    4: 'four',
+    5: 'five',
+    6: 'six',
+    7: 'seven',
+    8: 'eight',
+    9: 'nine',
+    '-': 'minus',
+    ',': 'point',
+    '.': 'point',
+  };
+
+  let result = '';
+  for (let i = 0; i < numberStr.length; i += 1) {
+    const char = numberStr[i];
+    if (digitToWord[char] !== undefined) {
+      result += (result ? ' ' : '') + digitToWord[char];
+    } else {
+      result += ' ' + char;
+    }
+  }
+  return result;
+}
 
 /**
  * Determines whether a string is a palindrome.
@@ -144,7 +196,19 @@ function convertNumberToString(numberStr) {}
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(str) {}
+function isPalindrome(str) {
+  let left = 0;
+  let right = str.length - 1;
+
+  while (left < right) {
+    if (str[left] !== str[right]) {
+      return false;
+    }
+    left += 1;
+    right -= 1;
+  }
+  return true;
+}
 
 /**
  * Finds the first occurrence of a letter in a string.
@@ -160,7 +224,14 @@ function isPalindrome(str) {}
  *  'qwerty', 'Q'     => -1
  *  'qwerty', 'p'     => -1
  */
-function getIndexOf(str, letter) {}
+function getIndexOf(str, letter) {
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === letter) {
+      return i;
+    }
+  }
+  return -1;
+}
 
 /**
  * Checks if a number contains a specific digit.
@@ -177,7 +248,18 @@ function getIndexOf(str, letter) {}
  *  12345, 0    => false
  *  12345, 6    => false
  */
-function isContainNumber(num, digit) {}
+function isContainNumber(num, digit) {
+  num = Math.abs(num);
+
+  while (num > 0) {
+    const currentDigit = num % 10;
+    if (currentDigit === digit) {
+      return true;
+    }
+    num = Math.floor(num / 10);
+  }
+  return false;
+}
 
 /**
  * Finds the index of an element in an array where the sum of elements to the left equals the sum of elements to the right.
@@ -192,7 +274,21 @@ function isContainNumber(num, digit) {}
  *  [2, 3, 9, 5] => 2       => 2 + 3 === 5 then balance element is 9 and its index = 2
  *  [1, 2, 3, 4, 5] => -1   => no balance element
  */
-function getBalanceIndex(arr) {}
+function getBalanceIndex(arr) {
+  let totalSum = 0;
+  for (let i = 0; i < arr.length; i += 1) {
+    totalSum += arr[i];
+  }
+  let leftSum = 0;
+  for (let i = 0; i < arr.length; i += 1) {
+    const rightSum = totalSum - leftSum - arr[i];
+    if (leftSum === rightSum) {
+      return i;
+    }
+    leftSum += arr[i];
+  }
+  return -1;
+}
 
 /**
  * Generates a spiral matrix of a given size, filled with numbers in ascending order starting from one.
