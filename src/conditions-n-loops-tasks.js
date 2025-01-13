@@ -41,11 +41,11 @@ function isPositive(number) {
 function getMaxNumber(a, b, c) {
   if (a > b && a > c) {
     return a;
-  } else if (b > a && b > c) {
-    return b;
-  } else {
-    return c;
   }
+  if (b > a && b > c) {
+    return b;
+  }
+  return c;
 }
 
 /**
@@ -123,19 +123,19 @@ function isIsoscelesTriangle(a, b, c) {
  */
 function convertToRomanNumerals(num) {
   if (num >= 10) {
-    return 'X' + convertToRomanNumerals(num - 10);
+    return `${'X'}${convertToRomanNumerals(num - 10)}`;
   }
   if (num >= 9) {
-    return 'IX' + convertToRomanNumerals(num - 9);
+    return `${'IX'}${convertToRomanNumerals(num - 9)}`;
   }
   if (num >= 5) {
-    return 'V' + convertToRomanNumerals(num - 5);
+    return `${'V'}${convertToRomanNumerals(num - 5)}`;
   }
   if (num >= 4) {
-    return 'IV' + convertToRomanNumerals(num - 4);
+    return `${'IV'}${convertToRomanNumerals(num - 4)}`;
   }
   if (num >= 1) {
-    return 'I' + convertToRomanNumerals(num - 1);
+    return `${'I'}${convertToRomanNumerals(num - 1)}`;
   }
   return '';
 }
@@ -178,7 +178,7 @@ function convertNumberToString(numberStr) {
     if (digitToWord[char] !== undefined) {
       result += (result ? ' ' : '') + digitToWord[char];
     } else {
-      result += ' ' + char;
+      result += `${' '}${char}`;
     }
   }
   return result;
@@ -249,14 +249,15 @@ function getIndexOf(str, letter) {
  *  12345, 6    => false
  */
 function isContainNumber(num, digit) {
-  num = Math.abs(num);
+  let newNum = num;
+  newNum = Math.abs(num);
 
-  while (num > 0) {
-    const currentDigit = num % 10;
+  while (newNum > 0) {
+    const currentDigit = newNum % 10;
     if (currentDigit === digit) {
       return true;
     }
-    num = Math.floor(num / 10);
+    newNum = Math.floor(newNum / 10);
   }
   return false;
 }
@@ -311,7 +312,53 @@ function getBalanceIndex(arr) {
  *          [10, 9,  8,  7]
  *        ]
  */
-function getSpiralMatrix(size) {}
+function getSpiralMatrix(size) {
+  const matrix = new Array(size).fill(0).map(() => new Array(size).fill(0));
+
+  let row = 0;
+  let col = 0;
+  let direction = 0;
+
+  for (let num = 1; num <= size * size; num += 1) {
+    matrix[row][col] = num;
+
+    switch (direction) {
+      case 0:
+        if (col < size - 1 && matrix[row][col + 1] === 0) {
+          col += 1;
+        } else {
+          direction = 1;
+          row += 1;
+        }
+        break;
+      case 1:
+        if (row < size - 1 && matrix[row + 1][col] === 0) {
+          row += 1;
+        } else {
+          direction = 2;
+          col -= 1;
+        }
+        break;
+      case 2:
+        if (col > 0 && matrix[row][col - 1] === 0) {
+          col -= 1;
+        } else {
+          direction = 3;
+          row -= 1;
+        }
+        break;
+      case 3:
+        if (row > 0 && matrix[row - 1][col] === 0) {
+          row -= 1;
+        } else {
+          direction = 0;
+          col += 1;
+        }
+        break;
+    }
+  }
+  return matrix;
+}
 
 /**
  * Rotates a matrix by 90 degrees clockwise in place.
