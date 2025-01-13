@@ -375,7 +375,23 @@ function getSpiralMatrix(size) {
  *    [7, 8, 9]         [9, 6, 3]
  *  ]                 ]
  */
-function rotateMatrix(matrix) {}
+function rotateMatrix(matrix) {
+  const n = matrix.length;
+  const newMatrix = matrix;
+  for (let layer = 0; layer < Math.floor(n / 2); layer += 1) {
+    const first = layer;
+    const last = n - layer - 1;
+    for (let i = first; i < last; i += 1) {
+      const offset = i - first;
+      const top = newMatrix[layer][i];
+      newMatrix[layer][i] = newMatrix[last - offset][layer];
+      newMatrix[last - offset][layer] = newMatrix[last][last - offset];
+      newMatrix[last][last - offset] = newMatrix[i][last];
+      newMatrix[i][last] = top;
+    }
+  }
+  return newMatrix;
+}
 
 /**
  * Sorts an array of numbers in ascending order in place.
